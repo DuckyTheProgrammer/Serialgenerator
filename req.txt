@@ -45,10 +45,10 @@
 
 2. ქალაქები (პირველი ორი ასო): {
     1. TB - Tbilisi
-    2. KT - Kutaisi
-    3. BT - Batumi
+    2. KA - Kutaisi
+    3. BA - Batumi
     4. KH - Khashuri
-    5. RT - Rustavi
+    5. RU - Rustavi
 }
 
 3. გარენდომებული არ უნდა ემთხვევოდე სახელმწიფო დაწესებულებას

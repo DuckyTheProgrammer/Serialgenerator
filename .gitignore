@@ -1,5 +1,7 @@
 #my ignore files
 test.py
+functions.py
+serialdata.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
