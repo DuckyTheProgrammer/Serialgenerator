@@ -2,6 +2,7 @@
 from sqlite3.dbapi2 import Cursor
 import tkinter as tk
 from tkinter import *
+from tkinter import messagebox
 import random
 import sqlite3
 
@@ -17,16 +18,54 @@ citylist = ['TB', 'KU', 'BA', 'KH', 'RU']
 
 # functions
 
-def dbcreate():
+def warningmsg(wtitle, werror):
+    messagebox.showwarning(wtitle, werror)
+
+def checkingtable():
+    '''
+    c.execute("CREATE TABLE tables(existen text)")
+    conn.commit()
+    c.execute("""
+    INSERT INTO tables VALUES("")
+    """)
+    conn.commit()
+    '''
+
+    c.execute("""
+    SELECT * FROM tables
+    """)
     
-    c.execute("""CREATE TABLE serialdatas(
+    tabledatas = c.fetchone()
+    print(tabledatas)
+
+    if tabledatas[0] == "serialdatas":
+        print('True')
+
+    else:
+        c.execute("""
+        DELETE FROM tables WHERE rowid=1
+        """)
+        conn.commit()
+        c.execute("""
+        INSERT INTO tables VALUES("serialdatas")
+        """)
+        conn.commit()
+
+        c.execute("""CREATE TABLE serialdatas(
         govermentjob text,
         city text,
         privatenum integer,
         name text,
         lastname text
-    )""")
-    conn.commit()
+        )""")
+        conn.commit()
+        c.execute("SELECT * FROM tables")
+
+        print('Creating table in database')
+        print(c.fetchall())
+
+
+
     
     
 def newreg():
@@ -87,6 +126,28 @@ def newreg():
         namedata = nameent.get()
         lnamedata = lnameent.get()
 
+        #checking if input fields was empty
+
+        if len(govdata) < 1:
+            warningmsg("Empty fields", "Empty fields")
+        else: pass
+
+        if len(citydata) < 1:
+            warningmsg("Empty fields", "Empty fields")
+        else: pass
+
+        if len(privatenumdata) < 1:
+            warningmsg("Empty fields", "Empty fields")
+        else: pass
+
+        if len(namedata) < 1:
+            warningmsg("Empty fields", "Empty fields")
+        else: pass
+
+        if len(lnamedata) < 1:
+            warningmsg("Empty fields", "Empty fields")
+        else: pass
+
         #clearing input fields
 
         datains = [govdata, citydata, privatenumdata, namedata, lnamedata]
@@ -94,7 +155,11 @@ def newreg():
         c.execute("SELECT * FROM serialdatas")
         conn.commit()
         print("Successfully entered your data")
+        fa = c.fetchall()
+        for t in fa:
+            print(t)
         print("Generating serial number")
+        
 
         #Checking gov job
 

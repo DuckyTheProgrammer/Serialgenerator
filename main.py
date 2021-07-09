@@ -5,10 +5,12 @@ import sqlite3
 
 #importing functions
 
-from functions import dbcreate, newreg
+from functions import newreg, checkingtable
 
 
-dbcreate()
+checkingtable()
+
+#dbcreate()
 
 
 #GUI
